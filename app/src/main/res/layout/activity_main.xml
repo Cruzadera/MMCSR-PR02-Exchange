@@ -1,18 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/lblAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/tvAmount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"/>
+    <EditText
+        android:id="@+id/txtAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:gravity="right"
+        android:inputType="numberDecimal"
+        android:text="@string/amountDefault"
+        android:selectAllOnFocus="true"/>
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/lblFromCurrency"
+        android:text="@string/txtFromCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"/>
+    <RadioGroup
+        android:id="@+id/rdgFromCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp">
+
+        <RadioButton
+            android:id="@+id/rbtEuro01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/txtCoin01" />
+        <RadioButton
+            android:id="@+id/rbtDollar01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/txtCoin02"/>
+        <RadioButton
+            android:id="@+id/rbtYen01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtCoin03"/>
+        <ImageView
+            android:id="@+id/imgFromCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:src="@drawable/ic_iconmonstr_currency_6"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/lblToCurrency"
+        android:text="@string/txtToCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"/>
+    <RadioGroup
+        android:id="@+id/rdgToCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingBottom="28dp">
+
+        <RadioButton
+            android:id="@+id/rbtEuro02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtCoin01"
+            android:enabled="false"/>
+
+        <RadioButton
+            android:id="@+id/rbtDollar02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/txtCoin02" />
+        <RadioButton
+            android:id="@+id/rbtYen02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtCoin03"/>
+        <ImageView
+            android:id="@+id/imgToCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:src="@drawable/ic_iconmonstr_currency_1"/>
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btnExchange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:paddingLeft="128dp"
+        android:paddingRight="128dp"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
