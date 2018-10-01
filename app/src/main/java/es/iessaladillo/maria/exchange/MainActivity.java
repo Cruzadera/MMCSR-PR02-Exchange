@@ -55,25 +55,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void toExchange() {
-        final double EUR_USD  = 1.15990;
+        final double EUR_USD = 1.15990;
         final double EUR_GBP = 0.887689;
         final double USD_GBP = 0.767312;
+        final char symbol_euro = '€', symbol_dollar = '$', symbol_pound = '£';
+
         double res=0, op1=0;
+        String result = "";
 
         try{
+            //We transform the text that is introduced to Double
             op1 = Double.parseDouble(lblAmount.getText().toString());
         }catch(NumberFormatException e){
            lblAmount.setText(R.string.amountDefault);
         }
-
+        //The result is calculated and the result with its corresponding symbols is introduced in the chain
         switch(rdgFromCurrency.getCheckedRadioButtonId()){
             case R.id.rbFromEuro:
                 switch (rdgToCurrency.getCheckedRadioButtonId()) {
                     case R.id.rbToDollar:
                         res = op1 * EUR_USD;
+                        result = result.concat(String.format("%.2f%c -> %c%.2f", op1, symbol_euro, symbol_dollar, res));
                         break;
                     case R.id.rbToPound:
                         res = op1 * EUR_GBP;
+                        result = result.concat(String.format("%.2f%c -> %c%.2f", op1, symbol_euro, symbol_pound, res));
                         break;
                 }
                 break;
@@ -81,29 +87,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch(rdgToCurrency.getCheckedRadioButtonId()) {
                     case R.id.rbToEuro:
                         res = op1 / EUR_USD;
+                        result = result.concat(String.format("%c%.2f -> %.2f%c", symbol_dollar, op1, res, symbol_euro));
                         break;
                     case R.id.rbToPound:
                         res = op1 * USD_GBP;
+                        result = result.concat(String.format("%c%.2f -> %c%.2f", symbol_dollar, op1, symbol_pound, res));
                         break;
                 }
-
+                break;
             case R.id.rbFromPound:
                 switch(rdgToCurrency.getCheckedRadioButtonId()) {
                     case R.id.rbToDollar:
                         res = op1 / USD_GBP;
+                        result = result.concat(String.format("%c%.2f -> %c%.2f", symbol_pound, op1, symbol_dollar, res));
                         break;
                     case R.id.rbToEuro:
                         res = op1 / EUR_GBP;
+                        result= result.concat(String.format("%c%.2f -> %.2f%c", symbol_pound, op1, res, symbol_euro));
                         break;
                 }
             break;
         }
 
-        Toast.makeText(this, String.format("%.2f", res), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
     }
 
     private void fromListener(){
-        toRefresh();
+        toRefresh(); //It cleans the disabled buttons that have been previously
+        //The currency symbol is changed and the corresponding buttons are disabled
         switch (rdgFromCurrency.getCheckedRadioButtonId()){
             case R.id.rbFromEuro:
                 imgFromCurrency.setImageResource(R.drawable.ic_euro);
