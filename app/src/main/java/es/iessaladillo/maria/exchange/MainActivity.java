@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton rbtEuro02;
     private RadioButton rbtDollar01;
     private RadioButton rbtDollar02;
-    private RadioButton rbtYen01;
-    private RadioButton rbtYen02;
+    private RadioButton rbtPound01;
+    private RadioButton rbtPound02;
     private ImageView imgFromCurrency;
     private ImageView imgToCurrency;
     private Button btnExchange;
@@ -36,14 +36,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lblAmount = ActivityCompat.requireViewById(this, R.id.txtAmount);
         rdgFromCurrency = ActivityCompat.requireViewById(this, R.id.rdgFromCurrency);
         rdgToCurrency= ActivityCompat.requireViewById(this, R.id.rdgToCurrency);
-        rbtEuro01 = ActivityCompat.requireViewById(this, R.id.rbtEuro01);
-        rbtEuro02 = ActivityCompat.requireViewById(this, R.id.rbtEuro02);
-        rbtDollar01 = ActivityCompat.requireViewById(this, R.id.rbtDollar01);
-        rbtDollar02 = ActivityCompat.requireViewById(this, R.id.rbtDollar02);
-        rbtYen01 = ActivityCompat.requireViewById(this, R.id.rbtYen01);
-        rbtYen02 = ActivityCompat.requireViewById(this, R.id.rbtYen02);
-        imgFromCurrency = ActivityCompat.requireViewById(this, R.id.imgFromCurrency);
-        imgToCurrency = ActivityCompat.requireViewById(this, R.id.imgToCurrency);
+        rbtEuro01 = ActivityCompat.requireViewById(this, R.id.rbFromEuro);
+        rbtEuro02 = ActivityCompat.requireViewById(this, R.id.rbToEuro);
+        rbtDollar01 = ActivityCompat.requireViewById(this, R.id.rbFromDollar);
+        rbtDollar02 = ActivityCompat.requireViewById(this, R.id.rbToDollar);
+        rbtPound01 = ActivityCompat.requireViewById(this, R.id.rbFromPound);
+        rbtPound02 = ActivityCompat.requireViewById(this, R.id.rbToPound);
+        imgFromCurrency = ActivityCompat.requireViewById(this, R.id.imgFrom);
+        imgToCurrency = ActivityCompat.requireViewById(this, R.id.imgTo);
         btnExchange = ActivityCompat.requireViewById(this, R.id.btnExchange);
 
         rdgFromCurrency.setOnCheckedChangeListener((group, checkedId) -> fromListener());
@@ -56,11 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void toExchange() {
         final double EUR_USD  = 1.15990;
-        final double USD_EUR = 0.860755;
-        final double JPY_EUR = 0.00756074;
-        final double EUR_JPY = 131.951;
-        final double USD_JPY = 113.993;
-        final double JPY_USD = 0.00877247;
+        final double EUR_GBP = 0.887689;
+        final double USD_GBP = 0.767312;
         double res=0, op1=0;
 
         try{
@@ -70,33 +67,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         switch(rdgFromCurrency.getCheckedRadioButtonId()){
-            case R.id.rbtEuro01:
+            case R.id.rbFromEuro:
                 switch (rdgToCurrency.getCheckedRadioButtonId()) {
-                    case R.id.rbtDollar02:
+                    case R.id.rbToDollar:
                         res = op1 * EUR_USD;
                         break;
-                    case R.id.rbtYen02:
-                        res = op1 * EUR_JPY;
+                    case R.id.rbToPound:
+                        res = op1 * EUR_GBP;
                         break;
                 }
                 break;
-            case R.id.rbtDollar01:
+            case R.id.rbFromDollar:
                 switch(rdgToCurrency.getCheckedRadioButtonId()) {
-                    case R.id.rbtEuro02:
-                        res = op1 * USD_EUR;
+                    case R.id.rbToEuro:
+                        res = op1 / EUR_USD;
                         break;
-                    case R.id.rbtYen02:
-                        res = op1 * USD_JPY;
+                    case R.id.rbToPound:
+                        res = op1 * USD_GBP;
                         break;
                 }
 
-            case R.id.rbtYen01:
+            case R.id.rbFromPound:
                 switch(rdgToCurrency.getCheckedRadioButtonId()) {
-                    case R.id.rbtDollar02:
-                        res = op1 * JPY_USD;
+                    case R.id.rbToDollar:
+                        res = op1 / USD_GBP;
                         break;
-                    case R.id.rbtEuro02:
-                        res = op1 * JPY_EUR;
+                    case R.id.rbToEuro:
+                        res = op1 / EUR_GBP;
                         break;
                 }
             break;
@@ -108,34 +105,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void fromListener(){
         toRefresh();
         switch (rdgFromCurrency.getCheckedRadioButtonId()){
-            case R.id.rbtEuro01:
-                imgFromCurrency.setImageResource(R.drawable.ic_iconmonstr_currency_6);
+            case R.id.rbFromEuro:
+                imgFromCurrency.setImageResource(R.drawable.ic_euro);
                 rbtEuro02.setEnabled(false);
                 break;
-            case R.id.rbtDollar01:
-                imgFromCurrency.setImageResource(R.drawable.ic_iconmonstr_currency_1);
+            case R.id.rbFromDollar:
+                imgFromCurrency.setImageResource(R.drawable.ic_dollar);
                 rbtDollar02.setEnabled(false);
                 break;
-            case R.id.rbtYen01:
-                imgFromCurrency.setImageResource(R.drawable.ic_iconmonstr_currency_12);
-                rbtYen02.setEnabled(false);
+            case R.id.rbFromPound:
+                imgFromCurrency.setImageResource(R.drawable.ic_pound);
+                rbtPound02.setEnabled(false);
                 break;
         }
     }
     private void toListener(){
         fromRefresh();
         switch (rdgToCurrency.getCheckedRadioButtonId()){
-            case R.id.rbtEuro02:
-                imgToCurrency.setImageResource(R.drawable.ic_iconmonstr_currency_6);
+            case R.id.rbToEuro:
+                imgToCurrency.setImageResource(R.drawable.ic_euro);
                 rbtEuro01.setEnabled(false);
                 break;
-            case R.id.rbtDollar02:
-                imgToCurrency.setImageResource(R.drawable.ic_iconmonstr_currency_1);
+            case R.id.rbToDollar:
+                imgToCurrency.setImageResource(R.drawable.ic_dollar);
                 rbtDollar01.setEnabled(false);
                 break;
-            case R.id.rbtYen02:
-                imgToCurrency.setImageResource(R.drawable.ic_iconmonstr_currency_12);
-                rbtYen01.setEnabled(false);
+            case R.id.rbToPound:
+                imgToCurrency.setImageResource(R.drawable.ic_pound);
+                rbtPound01.setEnabled(false);
                 break;
         }
     }
@@ -143,12 +140,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void toRefresh() {
         rbtDollar02.setEnabled(true);
         rbtEuro02.setEnabled(true);
-        rbtYen02.setEnabled(true);
+        rbtPound02.setEnabled(true);
     }
 
     private void fromRefresh(){
         rbtEuro01.setEnabled(true);
-        rbtYen01.setEnabled(true);
+        rbtPound01.setEnabled(true);
         rbtDollar01.setEnabled(true);
     }
 

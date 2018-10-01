@@ -4,7 +4,7 @@
     <string name="txtFromCurrency">From currency</string>
     <string name="txtCoin01">Euro</string>
     <string name="txtCoin02">Dollar</string>
-    <string name="txtCoin03">Yen</string>
+    <string name="txtCoin03">Pound</string>
     <string name="txtToCurrency">To currency</string>
     <string name="amountDefault">0.00</string>
 </resources>

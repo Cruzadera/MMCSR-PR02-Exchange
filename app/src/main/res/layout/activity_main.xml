@@ -43,28 +43,28 @@
         android:paddingLeft="16dp">
 
         <RadioButton
-            android:id="@+id/rbtEuro01"
+            android:id="@+id/rbFromEuro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/txtCoin01" />
         <RadioButton
-            android:id="@+id/rbtDollar01"
+            android:id="@+id/rbFromDollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="false"
             android:text="@string/txtCoin02"/>
         <RadioButton
-            android:id="@+id/rbtYen01"
+            android:id="@+id/rbFromPound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txtCoin03"/>
         <ImageView
-            android:id="@+id/imgFromCurrency"
+            android:id="@+id/imgFrom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
-            android:src="@drawable/ic_iconmonstr_currency_6"/>
+            android:src="@drawable/ic_euro"/>
     </RadioGroup>
 
     <TextView
@@ -83,29 +83,29 @@
         android:paddingBottom="28dp">
 
         <RadioButton
-            android:id="@+id/rbtEuro02"
+            android:id="@+id/rbToEuro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txtCoin01"
             android:enabled="false"/>
 
         <RadioButton
-            android:id="@+id/rbtDollar02"
+            android:id="@+id/rbToDollar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/txtCoin02" />
         <RadioButton
-            android:id="@+id/rbtYen02"
+            android:id="@+id/rbToPound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txtCoin03"/>
         <ImageView
-            android:id="@+id/imgToCurrency"
+            android:id="@+id/imgTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
-            android:src="@drawable/ic_iconmonstr_currency_1"/>
+            android:src="@drawable/ic_dollar"/>
     </RadioGroup>
 
 
