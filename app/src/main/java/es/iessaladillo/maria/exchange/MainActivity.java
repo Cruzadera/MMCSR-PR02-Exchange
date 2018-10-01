@@ -3,12 +3,15 @@ package es.iessaladillo.maria.exchange;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText lblAmount;
     private RadioGroup rdgFromCurrency;
     private RadioGroup rdgToCurrency;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rbtYen02;
     private ImageView imgFromCurrency;
     private ImageView imgToCurrency;
+    private Button btnExchange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +44,68 @@ public class MainActivity extends AppCompatActivity {
         rbtYen02 = ActivityCompat.requireViewById(this, R.id.rbtYen02);
         imgFromCurrency = ActivityCompat.requireViewById(this, R.id.imgFromCurrency);
         imgToCurrency = ActivityCompat.requireViewById(this, R.id.imgToCurrency);
+        btnExchange = ActivityCompat.requireViewById(this, R.id.btnExchange);
 
         rdgFromCurrency.setOnCheckedChangeListener((group, checkedId) -> fromListener());
         rdgToCurrency.setOnCheckedChangeListener((group, checkedId) -> toListener());
+        btnExchange.setOnClickListener(l -> toExchange());
+        lblAmount.setOnClickListener(this);
+
 
     }
 
-    public void fromListener(){
+    private void toExchange() {
+        final double EUR_USD  = 1.15990;
+        final double USD_EUR = 0.860755;
+        final double JPY_EUR = 0.00756074;
+        final double EUR_JPY = 131.951;
+        final double USD_JPY = 113.993;
+        final double JPY_USD = 0.00877247;
+        double res=0, op1=0;
+
+        try{
+            op1 = Double.parseDouble(lblAmount.getText().toString());
+        }catch(NumberFormatException e){
+           lblAmount.setText(R.string.amountDefault);
+        }
+
+        switch(rdgFromCurrency.getCheckedRadioButtonId()){
+            case R.id.rbtEuro01:
+                switch (rdgToCurrency.getCheckedRadioButtonId()) {
+                    case R.id.rbtDollar02:
+                        res = op1 * EUR_USD;
+                        break;
+                    case R.id.rbtYen02:
+                        res = op1 * EUR_JPY;
+                        break;
+                }
+                break;
+            case R.id.rbtDollar01:
+                switch(rdgToCurrency.getCheckedRadioButtonId()) {
+                    case R.id.rbtEuro02:
+                        res = op1 * USD_EUR;
+                        break;
+                    case R.id.rbtYen02:
+                        res = op1 * USD_JPY;
+                        break;
+                }
+
+            case R.id.rbtYen01:
+                switch(rdgToCurrency.getCheckedRadioButtonId()) {
+                    case R.id.rbtDollar02:
+                        res = op1 * JPY_USD;
+                        break;
+                    case R.id.rbtEuro02:
+                        res = op1 * JPY_EUR;
+                        break;
+                }
+            break;
+        }
+
+        Toast.makeText(this, String.format("%.2f", res), Toast.LENGTH_SHORT).show();
+    }
+
+    private void fromListener(){
         toRefresh();
         switch (rdgFromCurrency.getCheckedRadioButtonId()){
             case R.id.rbtEuro01:
@@ -63,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void toListener(){
+    private void toListener(){
         fromRefresh();
         switch (rdgToCurrency.getCheckedRadioButtonId()){
             case R.id.rbtEuro02:
@@ -91,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
         rbtEuro01.setEnabled(true);
         rbtYen01.setEnabled(true);
         rbtDollar01.setEnabled(true);
+    }
+
+    @Override
+    public void onClick(View v) {
+        lblAmount.selectAll();
     }
 }
 
