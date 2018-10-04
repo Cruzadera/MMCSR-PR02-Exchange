@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <!-- USA ATRIBUTOS ...Start EN VEZ DE ...Left y ...End EN VEZ DE ...Right -->
     <TextView
         android:id="@+id/lblAmount"
         android:layout_width="wrap_content"
@@ -18,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"/>
+    <!-- USA end EN VEZ DE right y start EN VEZ DE left -->
     <EditText
         android:id="@+id/txtAmount"
         android:layout_width="match_parent"
@@ -59,6 +61,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txtCoin03"/>
+        <!-- DEFINE SIEMPRE EN LOS ImageView EL ATRIBUTO android:contentDescription CON UNA
+             DESCRIPCIÓN TEXTUAL DE LA IMAGEN MOSTRADA -->
         <ImageView
             android:id="@+id/imgFrom"
             android:layout_width="wrap_content"
@@ -108,7 +112,8 @@
             android:src="@drawable/ic_dollar"/>
     </RadioGroup>
 
-
+    <!-- NO USES NÚMERO MÁGICOS COMO 128dp. DEFINE UN RECURSO DE DIMENSIÓN
+         QUE PUEDA TOMAR UN VALOR DISTINTO EN DISTINTOS TAMAÑO DE PANTALLA -->
     <Button
         android:id="@+id/btnExchange"
         android:layout_width="wrap_content"

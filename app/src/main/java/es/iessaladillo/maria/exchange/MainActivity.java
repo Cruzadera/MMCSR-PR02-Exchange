@@ -1,7 +1,5 @@
 package es.iessaladillo.maria.exchange;
 
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText lblAmount;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton rbtPound02;
     private ImageView imgFromCurrency;
     private ImageView imgToCurrency;
+    // DEFÍNELO COMO VARIABLE LOCAL SI SOLO SE VA A USAR EN UN ÚNICO MÉTODO.
     private Button btnExchange;
 
     @Override
@@ -51,7 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnExchange.setOnClickListener(l -> toExchange());
         lblAmount.setOnClickListener(this);
 
-
+        // AGREGO ESTAS LÍNEAS PARA QUE PASE ALGUNOS TESTS.
+        imgFromCurrency.setTag(R.drawable.ic_euro);
+        imgToCurrency.setTag(R.drawable.ic_dollar);
     }
 
     private void toExchange() {
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final double USD_GBP = 0.767312;
         final char symbol_euro = '€', symbol_dollar = '$', symbol_pound = '£';
 
+        // HAZ Code -> Reformat Code PARA QUE EL CÓDIGO QUEDE BONITO.
         double res=0, op1=0;
         String result = "";
 
@@ -75,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switch (rdgToCurrency.getCheckedRadioButtonId()) {
                     case R.id.rbToDollar:
                         res = op1 * EUR_USD;
+                        // EN VEZ DE USAR String.format() USA MEJOR RECURSOS DE CADENA CON
+                        // PARÁMETROS.
                         result = result.concat(String.format("%.2f%c -> %c%.2f", op1, symbol_euro, symbol_dollar, res));
                         break;
                     case R.id.rbToPound:
@@ -112,20 +119,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
     }
 
+    // NO ME GUSTA ESTE NOMBRE DE MÉTODO (LISTENER DE QUÉ?)
     private void fromListener(){
         toRefresh(); //It cleans the disabled buttons that have been previously
         //The currency symbol is changed and the corresponding buttons are disabled
         switch (rdgFromCurrency.getCheckedRadioButtonId()){
             case R.id.rbFromEuro:
                 imgFromCurrency.setImageResource(R.drawable.ic_euro);
+                // AGREGO ESTA LÍNEA PARA QUE PASE EL TEST. FÍJATE
+                imgFromCurrency.setTag(R.drawable.ic_euro);
                 rbtEuro02.setEnabled(false);
                 break;
             case R.id.rbFromDollar:
                 imgFromCurrency.setImageResource(R.drawable.ic_dollar);
+                // AGREGO ESTA LÍNEA PARA QUE PASE EL TEST. FÍJATE
+                imgFromCurrency.setTag(R.drawable.ic_dollar);
                 rbtDollar02.setEnabled(false);
                 break;
             case R.id.rbFromPound:
                 imgFromCurrency.setImageResource(R.drawable.ic_pound);
+                // AGREGO ESTA LÍNEA PARA QUE PASE EL TEST. FÍJATE
+                imgFromCurrency.setTag(R.drawable.ic_pound);
                 rbtPound02.setEnabled(false);
                 break;
         }
@@ -135,14 +149,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (rdgToCurrency.getCheckedRadioButtonId()){
             case R.id.rbToEuro:
                 imgToCurrency.setImageResource(R.drawable.ic_euro);
+                // AGREGO ESTA LÍNEA PARA QUE PASE EL TEST. FÍJATE
+                imgToCurrency.setTag(R.drawable.ic_euro);
                 rbtEuro01.setEnabled(false);
                 break;
             case R.id.rbToDollar:
                 imgToCurrency.setImageResource(R.drawable.ic_dollar);
+                // AGREGO ESTA LÍNEA PARA QUE PASE EL TEST. FÍJATE
+                imgToCurrency.setTag(R.drawable.ic_dollar);
                 rbtDollar01.setEnabled(false);
                 break;
             case R.id.rbToPound:
                 imgToCurrency.setImageResource(R.drawable.ic_pound);
+                // AGREGO ESTA LÍNEA PARA QUE PASE EL TEST. FÍJATE
+                imgToCurrency.setTag(R.drawable.ic_pound);
                 rbtPound01.setEnabled(false);
                 break;
         }
