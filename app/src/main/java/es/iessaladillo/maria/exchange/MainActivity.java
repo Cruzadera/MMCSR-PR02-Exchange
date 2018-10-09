@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton rbtPound02;
     private ImageView imgFromCurrency;
     private ImageView imgToCurrency;
-    // DEFÍNELO COMO VARIABLE LOCAL SI SOLO SE VA A USAR EN UN ÚNICO MÉTODO.
-    private Button btnExchange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         lblAmount = ActivityCompat.requireViewById(this, R.id.txtAmount);
         rdgFromCurrency = ActivityCompat.requireViewById(this, R.id.rdgFromCurrency);
-        rdgToCurrency= ActivityCompat.requireViewById(this, R.id.rdgToCurrency);
+        rdgToCurrency = ActivityCompat.requireViewById(this, R.id.rdgToCurrency);
         rbtEuro01 = ActivityCompat.requireViewById(this, R.id.rbFromEuro);
         rbtEuro02 = ActivityCompat.requireViewById(this, R.id.rbToEuro);
         rbtDollar01 = ActivityCompat.requireViewById(this, R.id.rbFromDollar);
@@ -46,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rbtPound02 = ActivityCompat.requireViewById(this, R.id.rbToPound);
         imgFromCurrency = ActivityCompat.requireViewById(this, R.id.imgFrom);
         imgToCurrency = ActivityCompat.requireViewById(this, R.id.imgTo);
-        btnExchange = ActivityCompat.requireViewById(this, R.id.btnExchange);
+        // DEFÍNELO COMO VARIABLE LOCAL SI SOLO SE VA A USAR EN UN ÚNICO MÉTODO. CORREGIDO
+        Button btnExchange = ActivityCompat.requireViewById(this, R.id.btnExchange);
 
         rdgFromCurrency.setOnCheckedChangeListener((group, checkedId) -> fromListener());
         rdgToCurrency.setOnCheckedChangeListener((group, checkedId) -> toListener());
@@ -64,18 +63,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final double USD_GBP = 0.767312;
         final char symbol_euro = '€', symbol_dollar = '$', symbol_pound = '£';
 
-        // HAZ Code -> Reformat Code PARA QUE EL CÓDIGO QUEDE BONITO.
-        double res=0, op1=0;
+        // HAZ Code -> Reformat Code PARA QUE EL CÓDIGO QUEDE BONITO. CORREGIDO
+        double res = 0, op1 = 0;
         String result = "";
 
-        try{
+        try {
             //We transform the text that is introduced to Double
             op1 = Double.parseDouble(lblAmount.getText().toString());
-        }catch(NumberFormatException e){
-           lblAmount.setText(R.string.amountDefault);
+        } catch (NumberFormatException e) {
+            lblAmount.setText(R.string.amountDefault);
         }
         //The result is calculated and the result with its corresponding symbols is introduced in the chain
-        switch(rdgFromCurrency.getCheckedRadioButtonId()){
+        switch (rdgFromCurrency.getCheckedRadioButtonId()) {
             case R.id.rbFromEuro:
                 switch (rdgToCurrency.getCheckedRadioButtonId()) {
                     case R.id.rbToDollar:
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.rbFromDollar:
-                switch(rdgToCurrency.getCheckedRadioButtonId()) {
+                switch (rdgToCurrency.getCheckedRadioButtonId()) {
                     case R.id.rbToEuro:
                         res = op1 / EUR_USD;
                         result = result.concat(String.format("%c%.2f -> %.2f%c", symbol_dollar, op1, res, symbol_euro));
@@ -103,27 +102,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.rbFromPound:
-                switch(rdgToCurrency.getCheckedRadioButtonId()) {
+                switch (rdgToCurrency.getCheckedRadioButtonId()) {
                     case R.id.rbToDollar:
                         res = op1 / USD_GBP;
                         result = result.concat(String.format("%c%.2f -> %c%.2f", symbol_pound, op1, symbol_dollar, res));
                         break;
                     case R.id.rbToEuro:
                         res = op1 / EUR_GBP;
-                        result= result.concat(String.format("%c%.2f -> %.2f%c", symbol_pound, op1, res, symbol_euro));
+                        result = result.concat(String.format("%c%.2f -> %.2f%c", symbol_pound, op1, res, symbol_euro));
                         break;
                 }
-            break;
+                break;
         }
 
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
     }
 
     // NO ME GUSTA ESTE NOMBRE DE MÉTODO (LISTENER DE QUÉ?)
-    private void fromListener(){
+    private void fromListener() {
         toRefresh(); //It cleans the disabled buttons that have been previously
         //The currency symbol is changed and the corresponding buttons are disabled
-        switch (rdgFromCurrency.getCheckedRadioButtonId()){
+        switch (rdgFromCurrency.getCheckedRadioButtonId()) {
             case R.id.rbFromEuro:
                 imgFromCurrency.setImageResource(R.drawable.ic_euro);
                 // AGREGO ESTA LÍNEA PARA QUE PASE EL TEST. FÍJATE
@@ -144,9 +143,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-    private void toListener(){
+
+    private void toListener() {
         fromRefresh();
-        switch (rdgToCurrency.getCheckedRadioButtonId()){
+        switch (rdgToCurrency.getCheckedRadioButtonId()) {
             case R.id.rbToEuro:
                 imgToCurrency.setImageResource(R.drawable.ic_euro);
                 // AGREGO ESTA LÍNEA PARA QUE PASE EL TEST. FÍJATE
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rbtPound02.setEnabled(true);
     }
 
-    private void fromRefresh(){
+    private void fromRefresh() {
         rbtEuro01.setEnabled(true);
         rbtPound01.setEnabled(true);
         rbtDollar01.setEnabled(true);

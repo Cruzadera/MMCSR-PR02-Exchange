@@ -17,14 +17,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"/>
     <!-- USA end EN VEZ DE right y start EN VEZ DE left -->
     <EditText
         android:id="@+id/txtAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:gravity="right"
         android:inputType="numberDecimal"
         android:text="@string/amountDefault"
@@ -35,14 +35,14 @@
         android:text="@string/txtFromCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"/>
     <RadioGroup
         android:id="@+id/rdgFromCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="16dp">
+        android:paddingStart="16dp">
 
         <RadioButton
             android:id="@+id/rbFromEuro"
@@ -67,8 +67,9 @@
             android:id="@+id/imgFrom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:src="@drawable/ic_euro"/>
+            android:paddingStart="16dp"
+            android:src="@drawable/ic_euro"
+            android:contentDescription="@string/imgFromDescription" />
     </RadioGroup>
 
     <TextView
@@ -76,14 +77,14 @@
         android:text="@string/txtToCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"/>
     <RadioGroup
         android:id="@+id/rdgToCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
         android:paddingBottom="28dp">
 
         <RadioButton
@@ -108,8 +109,10 @@
             android:id="@+id/imgTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:src="@drawable/ic_dollar"/>
+            android:paddingStart="16dp"
+            android:src="@drawable/ic_dollar"
+            android:contentDescription="Do
+            llar" />
     </RadioGroup>
 
     <!-- NO USES NÚMERO MÁGICOS COMO 128dp. DEFINE UN RECURSO DE DIMENSIÓN

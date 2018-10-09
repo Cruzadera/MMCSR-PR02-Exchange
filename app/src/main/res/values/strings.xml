@@ -8,4 +8,5 @@
     <string name="txtToCurrency">To currency</string>
     <string name="amountDefault">0.00</string>
     <string name="msg_invalidValue">Invalid value entered</string>
+    <string name="imgFromDescription">euro</string>
 </resources>
